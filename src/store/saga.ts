@@ -13,10 +13,7 @@ export const sagaActions = {
 
 export function* persistStoreSaga(action: AnyAction) {
   const state: RootState = yield select()
-  if (
-    action.type !== sagaActions.LOAD_STATE_SAGA &&
-    action.type !== hydrate.type
-  ) {
+  if (action.type !== sagaActions.LOAD_STATE_SAGA) {
     yield call(() => save(state))
   }
 }
