@@ -1,8 +1,8 @@
 import React from 'react'
 
-import { Box, Tab,Tabs } from '@mui/material'
+import { Box, Tab, Tabs } from '@mui/material'
 
-import { Counter } from './counter'
+import { Stats } from './counter'
 import { Editor } from './editor'
 
 const tabs = {
@@ -34,7 +34,7 @@ function App() {
       </Box>
 
       {activeTab === 'editor' && <Editor />}
-      {activeTab === 'stats' && <Counter />}
+      {activeTab === 'stats' && <Stats />}
     </Box>
   )
 }
