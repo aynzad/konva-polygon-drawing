@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { useDispatch } from 'react-redux'
 import { useEffectOnce } from 'react-use'
 
@@ -10,12 +9,13 @@ import {
   DialogContentText,
   DialogTitle
 } from '@mui/material'
+import { useDialogState } from '@src/hooks/use-dialog-state'
 import { isExist } from '@src/store/persist'
 import { sagaActions } from '@src/store/saga'
 
 export default function RestoreDialog() {
   const dispatch = useDispatch()
-  const [open, setOpen] = React.useState(false)
+  const [open, handleOpen, handleClose] = useDialogState(false)
 
   useEffectOnce(() => {
     const isPreviousSessionExist = isExist()
@@ -23,14 +23,6 @@ export default function RestoreDialog() {
       handleOpen()
     }
   })
-
-  const handleOpen = () => {
-    setOpen(true)
-  }
-
-  const handleClose = () => {
-    setOpen(false)
-  }
 
   const handleRestore = () => {
     dispatch({ type: sagaActions.LOAD_STATE_SAGA })
@@ -63,6 +55,7 @@ export default function RestoreDialog() {
             Create new
           </Button>
           <Button
+            type="submit"
             variant="contained"
             color="primary"
             onClick={handleRestore}
