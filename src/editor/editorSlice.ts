@@ -132,6 +132,12 @@ export const selectActiveHistoryNode = (state: RootState) =>
 export const selectIsDrawing = (state: RootState) =>
   typeof state.editor.activePolygonId === 'number'
 
+export const selectHasUndo = (state: RootState) =>
+  state.editor.activeHistoryNodeIndex > 0
+
+export const selectHasRedo = (state: RootState) =>
+  state.editor.history.length > state.editor.activeHistoryNodeIndex + 1
+
 export const {
   undo,
   redo,

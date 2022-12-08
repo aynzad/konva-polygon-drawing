@@ -3,6 +3,8 @@ import { KonvaEventObject } from 'konva/lib/Node'
 import type { Stage as StageType } from 'konva/lib/Stage'
 import { Layer, Stage } from 'react-konva'
 
+import { Polygon } from '@src/components/Polygon'
+import { Toolbox } from '@src/components/Toolbox'
 import { useZoomStage } from '@src/hooks/use-zoom-stage'
 import { useAppDispatch, useAppSelector } from '@src/store/hooks'
 import { generateRandomColor } from '@src/utils/generate-random-color'
@@ -13,14 +15,19 @@ import {
   dragPointMove,
   dragPointStart,
   initialNewPolygon,
+  redo,
   selectActiveHistoryNode,
-  selectIsDrawing
+  selectIsDrawing,
+  undo
 } from './editorSlice'
-import { Polygon } from './Polygon'
 
 export function Editor() {
   const stageRef = useRef<StageType | null>(null)
-  const { scale, position, reset } = useZoomStage({ stage: stageRef?.current })
+  const {
+    scale,
+    position,
+    reset: onResetZoom
+  } = useZoomStage({ stage: stageRef?.current })
 
   const scene = useAppSelector(selectActiveHistoryNode)
   const isDrawing = useAppSelector(selectIsDrawing)
@@ -73,27 +80,42 @@ export function Editor() {
     dispatch(dragPointStart({ polygonId, pointId, position }))
   }
 
+  const handleRedo = () => {
+    dispatch(redo())
+  }
+
+  const handleUndo = () => {
+    dispatch(undo())
+  }
+
   return (
-    <Stage
-      ref={stageRef}
-      width={window.innerWidth}
-      height={window.innerHeight}
-      onClick={handleAddPoint}
-      onDblClick={reset}
-      scale={scale}
-      position={position}
-    >
-      <Layer>
-        {scene.map(polygon => (
-          <Polygon
-            key={polygon.id}
-            onDragPointMove={handleDragPointMove}
-            onDragPointStart={handleDragPointStart}
-            isDrawing={isDrawing}
-            {...polygon}
-          />
-        ))}
-      </Layer>
-    </Stage>
+    <>
+      <Toolbox
+        hidden={isDrawing}
+        onUndo={handleUndo}
+        onRedo={handleRedo}
+        onResetZoom={onResetZoom}
+      />
+      <Stage
+        ref={stageRef}
+        width={window.innerWidth}
+        height={window.innerHeight}
+        onClick={handleAddPoint}
+        scale={scale}
+        position={position}
+      >
+        <Layer>
+          {scene.map(polygon => (
+            <Polygon
+              key={polygon.id}
+              onDragPointMove={handleDragPointMove}
+              onDragPointStart={handleDragPointStart}
+              isDrawing={isDrawing}
+              {...polygon}
+            />
+          ))}
+        </Layer>
+      </Stage>
+    </>
   )
 }
