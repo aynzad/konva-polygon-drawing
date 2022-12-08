@@ -29,7 +29,7 @@ export function useZoomStage({
   scaleBy = DEFAULT_SCALE_BY
 }: Props): IUseZoomStage {
   const [scale, setScale] = useState<Vector2d>(initialScale)
-  const [position, setPosition] = useState<Vector2d>(INITIAL_POSITION)
+  const [position, setPosition] = useState<Vector2d>(initialPosition)
 
   const reset = () => {
     setScale(initialScale)
