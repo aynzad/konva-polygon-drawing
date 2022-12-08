@@ -5,25 +5,31 @@ import { IPolygon } from '@src/types'
 
 interface Props extends IPolygon {
   isDrawing: boolean
-  onDragDot: (
+  onDragPointStart: (
     event: KonvaEventObject<DragEvent>,
     shapeId: number,
-    dotId: number
+    pointId: number
+  ) => void
+  onDragPointMove: (
+    event: KonvaEventObject<DragEvent>,
+    shapeId: number,
+    pointId: number
   ) => void
 }
 export function Polygon({
   id,
-  dots,
+  points,
   closed,
   fill,
   isDrawing,
-  onDragDot
+  onDragPointStart,
+  onDragPointMove
 }: Props) {
   return (
     <>
       <Line
-        points={dots
-          .map(dot => [dot.x, dot.y])
+        points={points
+          .map(point => [point.x, point.y])
           .reduce((prev, current) => prev.concat(current))}
         fill={fill}
         stroke={'orange'}
@@ -33,15 +39,16 @@ export function Polygon({
         dash={[]}
       />
 
-      {dots.map(dot => (
+      {points.map(point => (
         <Circle
-          key={dot.id}
-          x={dot.x}
-          y={dot.y}
+          key={point.id}
+          x={point.x}
+          y={point.y}
           radius={4}
           stroke="#ff0000"
           strokeWidth={1}
-          onDragMove={e => onDragDot(e, id, dot.id)}
+          onDragMove={e => onDragPointMove(e, id, point.id)}
+          onDragStart={e => onDragPointStart(e, id, point.id)}
           draggable={!isDrawing}
         />
       ))}

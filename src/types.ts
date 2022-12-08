@@ -1,11 +1,11 @@
-export interface IDot {
+import { Vector2d } from 'konva/lib/types'
+
+export interface IPoint extends Vector2d {
   id: number
-  x: number
-  y: number
 }
 export interface IPolygon {
   id: number
-  dots: IDot[]
+  points: IPoint[]
   fill: string
   closed: boolean
 }
