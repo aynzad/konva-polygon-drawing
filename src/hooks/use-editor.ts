@@ -3,9 +3,8 @@ import { KonvaEventObject } from 'konva/lib/Node'
 import {
   addPointToActivePolygon,
   createHistoryNode,
-  dragPointMove,
-  dragPointStart,
   initialNewPolygon,
+  movePoint,
   redo,
   selectActiveHistoryNode,
   selectIsDrawing,
@@ -48,7 +47,7 @@ export function useEditor() {
       return
     }
 
-    dispatch(dragPointMove({ polygonId, pointId, position }))
+    dispatch(movePoint({ polygonId, pointId, position }))
   }
 
   const handleDragPointStart = (
@@ -63,7 +62,7 @@ export function useEditor() {
       return
     }
     dispatch(createHistoryNode())
-    dispatch(dragPointStart({ polygonId, pointId, position }))
+    dispatch(movePoint({ polygonId, pointId, position }))
   }
 
   const handleRedo = () => {

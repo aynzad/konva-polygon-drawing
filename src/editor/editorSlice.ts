@@ -31,28 +31,33 @@ export const editorSlice = createSlice({
           ? state.activeHistoryNodeIndex + 1
           : state.activeHistoryNodeIndex
     },
+    // Clone last scene into new history node
     createHistoryNode: state => {
+      // remove possible ahead nodes in case the user hit undo button
       state.history = state.history.slice(0, state.activeHistoryNodeIndex + 1)
-      // clone previous node
+      // clone last node
       const previousNode = state.history[state.history.length - 1]
       state.history.push(previousNode)
+      // oint the active history node to the just-created one
       state.activeHistoryNodeIndex = state.activeHistoryNodeIndex + 1
     },
+    // Add new polygon to the active scene
     initialNewPolygon: (
       state,
       action: PayloadAction<{ position: Vector2d; fill: string }>
     ) => {
       const activeHistoryNode = state.history[state.history.length - 1]
 
-      state.activePolygonId = activeHistoryNode.length
-
+      const newPolygonId = activeHistoryNode.length
       activeHistoryNode.push({
-        id: state.activePolygonId,
+        id: newPolygonId,
         fill: action.payload.fill,
         closed: false,
         points: [{ id: 0, ...action.payload.position }]
       })
+      state.activePolygonId = newPolygonId
     },
+    // Add new point to the active polygon
     addPointToActivePolygon: (
       state,
       action: PayloadAction<{ position: Vector2d }>
@@ -79,29 +84,8 @@ export const editorSlice = createSlice({
         })
       }
     },
-    dragPointStart: (
-      state,
-      action: PayloadAction<{
-        polygonId: number
-        pointId: number
-        position: Vector2d
-      }>
-    ) => {
-      const activeHistoryNode = state.history[state.activeHistoryNodeIndex]
-
-      const polygon = activeHistoryNode.find(
-        ({ id }) => id === action.payload.polygonId
-      )
-      const point = polygon?.points.find(
-        ({ id }) => id === action.payload.pointId
-      )
-
-      if (point) {
-        point.x = action.payload.position.x
-        point.y = action.payload.position.y
-      }
-    },
-    dragPointMove: (
+    // Edit polygon by moving a point
+    movePoint: (
       state,
       action: PayloadAction<{
         polygonId: number
@@ -144,8 +128,7 @@ export const {
   createHistoryNode,
   initialNewPolygon,
   addPointToActivePolygon,
-  dragPointStart,
-  dragPointMove
+  movePoint
 } = editorSlice.actions
 
 export default editorSlice.reducer
