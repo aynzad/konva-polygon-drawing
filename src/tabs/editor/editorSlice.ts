@@ -125,6 +125,39 @@ export const selectHasUndo = (state: RootState) =>
 export const selectHasRedo = (state: RootState) =>
   state.editor.history.length > state.editor.activeHistoryNodeIndex + 1
 
+export const selectTotalPolygons = (state: RootState) => {
+  const activeHistoryNode =
+    state.editor.history[state.editor.activeHistoryNodeIndex]
+  return activeHistoryNode.length
+}
+
+export const selectTotalPoints = (state: RootState) => {
+  const activeHistoryNode =
+    state.editor.history[state.editor.activeHistoryNodeIndex]
+
+  return activeHistoryNode.reduce((sum, cur) => {
+    return sum + cur.points.length
+  }, 0)
+}
+
+export const selectMaxPoints = (state: RootState) => {
+  const activeHistoryNode =
+    state.editor.history[state.editor.activeHistoryNodeIndex]
+
+  return activeHistoryNode.reduce((max, cur) => {
+    return max > cur.points.length ? max : cur.points.length
+  }, 0)
+}
+
+export const selectMinPoints = (state: RootState) => {
+  const activeHistoryNode =
+    state.editor.history[state.editor.activeHistoryNodeIndex]
+
+  return activeHistoryNode.reduce((min, cur) => {
+    return min < cur.points.length ? min : cur.points.length
+  }, Infinity)
+}
+
 export const {
   hydrate,
   undo,

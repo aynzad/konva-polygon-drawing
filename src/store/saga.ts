@@ -1,7 +1,7 @@
 import { all, call, put, select, takeLatest } from 'redux-saga/effects'
 
 import { AnyAction } from '@reduxjs/toolkit'
-import { hydrate } from '@src/editor/editorSlice'
+import { hydrate } from '@src/tabs/editor/editorSlice'
 
 import { RootState } from './index'
 import { load, remove, save } from './persist'

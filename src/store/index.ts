@@ -2,7 +2,7 @@ import createSagaMiddleware from 'redux-saga'
 
 import { configureStore } from '@reduxjs/toolkit'
 
-import editorReducer from '../editor/editorSlice'
+import editorReducer from '../tabs/editor/editorSlice'
 
 import saga from './saga'
 

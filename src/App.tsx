@@ -1,10 +1,9 @@
 import React from 'react'
 
 import { Box, Tab, Tabs, Typography } from '@mui/material'
-
-import RestoreDialog from './components/RestoreDialog'
-import { Stats } from './counter'
-import { Editor } from './editor'
+import RestoreDialog from '@src/components/RestoreDialog'
+import { Editor } from '@src/tabs/editor'
+import { Stats } from '@src/tabs/stats'
 
 const tabs = {
   editor: 'Editor',

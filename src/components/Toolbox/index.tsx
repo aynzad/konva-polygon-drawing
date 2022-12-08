@@ -1,7 +1,7 @@
 import { CenterFocusStrong, Redo, Undo } from '@mui/icons-material'
 import { Fade, Grid, List, Paper, ThemeProvider, useTheme } from '@mui/material'
-import { selectHasRedo, selectHasUndo } from '@src/editor/editorSlice'
 import { useAppSelector } from '@src/store/hooks'
+import { selectHasRedo, selectHasUndo } from '@src/tabs/editor/editorSlice'
 import { darkTheme } from '@src/theme'
 
 import { ToolboxItem } from './ToolboxItem'

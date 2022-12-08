@@ -1,6 +1,7 @@
 import { useCallback } from 'react'
 import { KonvaEventObject } from 'konva/lib/Node'
 
+import { useAppDispatch, useAppSelector } from '@src/store/hooks'
 import {
   addPointToActivePolygon,
   createHistoryNode,
@@ -10,8 +11,7 @@ import {
   selectActiveHistoryNode,
   selectIsDrawing,
   undo
-} from '@src/editor/editorSlice'
-import { useAppDispatch, useAppSelector } from '@src/store/hooks'
+} from '@src/tabs/editor/editorSlice'
 import { generateRandomColor } from '@src/utils/generate-random-color'
 
 export function useEditor() {
