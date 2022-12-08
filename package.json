@@ -1,7 +1,9 @@
 {
   "name": "konva-polygon-drawing",
+  "description": "A simple polygon drawing app using react-konva, redux, redux-saga",
   "version": "0.1.0",
-  "private": true,
+  "author": "Alireza Esfahani <alireza@esfahani.dev>",
+  "license": "Apache-2.0",
   "scripts": {
     "start": "craco start",
     "start:react": "react-scripts start",
