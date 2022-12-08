@@ -48,6 +48,7 @@ export function Toolbox({ hidden, onRedo, onUndo, onResetZoom }: Props) {
                 <List
                   sx={{
                     maxWidth: theme.spacing(7),
+                    overflow: 'hidden',
                     ':hover': {
                       maxWidth: 'unset'
                     }
