@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { KonvaEventObject } from 'konva/lib/Node'
 import type { Stage } from 'konva/lib/Stage'
 import { Vector2d } from 'konva/lib/types'
@@ -31,10 +31,10 @@ export function useZoomStage({
   const [scale, setScale] = useState<Vector2d>(initialScale)
   const [position, setPosition] = useState<Vector2d>(initialPosition)
 
-  const reset = () => {
+  const reset = useCallback(() => {
     setScale(initialScale)
     setPosition(INITIAL_POSITION)
-  }
+  }, [initialScale])
 
   useEffect(() => {
     if (stage) {

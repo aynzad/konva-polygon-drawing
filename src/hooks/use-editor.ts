@@ -1,3 +1,4 @@
+import { useCallback } from 'react'
 import { KonvaEventObject } from 'konva/lib/Node'
 
 import {
@@ -65,13 +66,13 @@ export function useEditor() {
     dispatch(movePoint({ polygonId, pointId, position }))
   }
 
-  const handleRedo = () => {
+  const handleRedo = useCallback(() => {
     dispatch(redo())
-  }
+  }, [dispatch])
 
-  const handleUndo = () => {
+  const handleUndo = useCallback(() => {
     dispatch(undo())
-  }
+  }, [dispatch])
 
   return {
     isDrawing,

@@ -15,7 +15,6 @@ interface Props {
 
 export function Toolbox({ hidden, onRedo, onUndo, onResetZoom }: Props) {
   const theme = useTheme()
-
   const hasUndo = useAppSelector(selectHasUndo)
   const hasRedo = useAppSelector(selectHasRedo)
 
@@ -28,8 +27,7 @@ export function Toolbox({ hidden, onRedo, onUndo, onResetZoom }: Props) {
             zIndex: theme.zIndex.fab,
             top: theme.spacing(6),
             left: 0,
-            margin: theme.spacing(2),
-            height: '100%'
+            margin: theme.spacing(2)
           }}
         >
           <Paper>
@@ -43,22 +41,23 @@ export function Toolbox({ hidden, onRedo, onUndo, onResetZoom }: Props) {
                 }}
               >
                 <ToolboxItem
-                  disabled={!hasUndo}
+                  disabled={!hasUndo || hidden}
                   onClick={onUndo}
-                  tooltip="cmd/ctrl + Z"
+                  shortcut="ctrl + z"
                   Icon={<Undo />}
                   text="Undo"
                 />
                 <ToolboxItem
-                  disabled={!hasRedo}
+                  disabled={!hasRedo || hidden}
                   onClick={onRedo}
-                  tooltip="cmd/ctrl + Y"
+                  shortcut="ctrl + y"
                   Icon={<Redo />}
                   text="Redo"
                 />
                 <ToolboxItem
+                  disabled={hidden}
                   onClick={onResetZoom}
-                  tooltip="cmd/ctrl + 0"
+                  shortcut="ctrl + 0"
                   Icon={<CenterFocusStrong />}
                   text="Reset Zoom"
                 />
