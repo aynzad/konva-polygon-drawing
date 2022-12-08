@@ -1,6 +1,6 @@
 import { Vector2d } from 'konva/lib/types'
 
-export const PERSISTANCE_KEY = 'konva-polygon-drawing-v.0.1'
+export const PERSISTANCE_KEY = 'konva-polygon-drawing-v.0.2'
 
 export const DEFAULT_PROXIMITY_OFFSET: number = 10
 export const INITIAL_SCALE: Vector2d = { x: 1, y: 1 }

@@ -21,6 +21,9 @@ export const editorSlice = createSlice({
   name: 'editor',
   initialState,
   reducers: {
+    hydrate: (_, action: PayloadAction<EditorState>) => {
+      return action.payload
+    },
     undo: state => {
       state.activeHistoryNodeIndex =
         state.activeHistoryNodeIndex > 0 ? state.activeHistoryNodeIndex - 1 : 0
@@ -38,7 +41,7 @@ export const editorSlice = createSlice({
       // clone last node
       const previousNode = state.history[state.history.length - 1]
       state.history.push(previousNode)
-      // oint the active history node to the just-created one
+      // point the active history node to the just-created one
       state.activeHistoryNodeIndex = state.activeHistoryNodeIndex + 1
     },
     // Add new polygon to the active scene
@@ -123,6 +126,7 @@ export const selectHasRedo = (state: RootState) =>
   state.editor.history.length > state.editor.activeHistoryNodeIndex + 1
 
 export const {
+  hydrate,
   undo,
   redo,
   createHistoryNode,
