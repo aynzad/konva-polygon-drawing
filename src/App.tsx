@@ -1,7 +1,8 @@
 import React from 'react'
 
-import { Box, Tab, Tabs } from '@mui/material'
+import { Box, Tab, Tabs, Typography } from '@mui/material'
 
+import RestoreDialog from './components/RestoreDialog'
 import { Stats } from './counter'
 import { Editor } from './editor'
 
@@ -19,8 +20,27 @@ function App() {
   }
 
   return (
-    <Box sx={{ width: '100%' }}>
-      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+    <Box sx={{ width: '100%', height: '100vh', overflow: 'hidden' }}>
+      <Box
+        sx={{
+          borderBottom: 1,
+          borderColor: 'divider',
+          display: 'flex',
+          alignItems: 'center',
+          gap: 2
+        }}
+      >
+        <Typography
+          sx={{
+            px: 2,
+            fontWeight: 'bold'
+          }}
+          color="primary"
+          variant="h6"
+          component="h1"
+        >
+          Konva Polygon Drawing
+        </Typography>
         <Tabs value={activeTab} onChange={handleTabChange} aria-label="Tabs">
           {Object.keys(tabs).map((key, index) => (
             <Tab
@@ -35,6 +55,8 @@ function App() {
 
       {activeTab === 'editor' && <Editor />}
       {activeTab === 'stats' && <Stats />}
+
+      <RestoreDialog />
     </Box>
   )
 }
