@@ -36,7 +36,6 @@ export function ImportExport({
     } catch (e) {
       console.error(e)
     }
-    console.log('import json', json)
   }
 
   return (
