@@ -22,6 +22,15 @@ export function load(): Promise<RootState | null> {
   }
 }
 
+export function remove(): Promise<unknown> {
+  try {
+    window.localStorage.removeItem(PERSISTANCE_KEY)
+    return Promise.resolve({})
+  } catch {
+    return Promise.reject({})
+  }
+}
+
 export function isExist(): boolean {
   const jsonState = window.localStorage.getItem(PERSISTANCE_KEY)
 

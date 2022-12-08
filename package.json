@@ -20,6 +20,7 @@
     "react-konva": "^18.2.3",
     "react-redux": "^8.0.5",
     "react-scripts": "5.0.1",
+    "react-use": "^17.4.0",
     "redux-saga": "^1.2.1"
   },
   "devDependencies": {

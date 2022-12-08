@@ -1,17 +1,14 @@
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import type { Stage as StageType } from 'konva/lib/Stage'
 import { Layer, Stage } from 'react-konva'
-import { useDispatch } from 'react-redux'
 
 import { Polygon } from '@src/components/Polygon'
+import RestoreDialog from '@src/components/RestoreDialog'
 import { Toolbox } from '@src/components/Toolbox'
 import { useEditor } from '@src/hooks/use-editor'
 import { useZoomStage } from '@src/hooks/use-zoom-stage'
-import { isExist } from '@src/store/persist'
-import { sagaActions } from '@src/store/saga'
 
 export function Editor() {
-  const dispatch = useDispatch()
   const stageRef = useRef<StageType | null>(null)
   const {
     scale,
@@ -28,14 +25,6 @@ export function Editor() {
     handleDragPointMove,
     handleDragPointStart
   } = useEditor()
-
-  useEffect(() => {
-    const isPreviousSessionExist = isExist()
-    if (isPreviousSessionExist) {
-      dispatch({ type: sagaActions.LOAD_STATE_SAGA })
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
 
   return (
     <>
@@ -65,6 +54,7 @@ export function Editor() {
           ))}
         </Layer>
       </Stage>
+      <RestoreDialog />
     </>
   )
 }
