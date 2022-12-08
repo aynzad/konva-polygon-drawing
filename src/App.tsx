@@ -39,7 +39,7 @@ function App() {
           variant="h6"
           component="h1"
         >
-          Konva Polygon Drawing
+          🔹 Konva Polygon Drawing
         </Typography>
         <Tabs value={activeTab} onChange={handleTabChange} aria-label="Tabs">
           {Object.keys(tabs).map((key, index) => (
