@@ -28,7 +28,7 @@ export function Editor() {
   return (
     <>
       <Toolbox
-        hidden={isDrawing}
+        disabled={isDrawing}
         onUndo={handleUndo}
         onRedo={handleRedo}
         onResetZoom={onResetZoom}
