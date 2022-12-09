@@ -2,7 +2,6 @@ import { useCallback } from 'react'
 import { KonvaEventObject } from 'konva/lib/Node'
 import { useKey } from 'react-use'
 
-import { useAppDispatch, useAppSelector } from '@src/store/hooks'
 import {
   addPointToActivePolygon,
   cancelDrawing,
@@ -14,6 +13,7 @@ import {
   selectIsDrawing,
   undo
 } from '@src/layouts/editor/editorSlice'
+import { useAppDispatch, useAppSelector } from '@src/store/hooks'
 import { generateRandomColor } from '@src/utils/generate-random-color'
 
 export function useEditor() {

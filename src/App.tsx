@@ -1,11 +1,10 @@
 import React from 'react'
 
 import { Box, Tab, Tabs } from '@mui/material'
+import { Logo } from '@src/components/Logo'
 import RestoreDialog from '@src/components/RestoreDialog'
 import { Editor } from '@src/layouts/editor'
 import { Stats } from '@src/layouts/stats'
-
-import { Logo } from './components/Logo'
 
 const tabs = {
   editor: 'Editor',

@@ -1,10 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useCopyToClipboard } from 'react-use'
 
-import { RootState } from '@src/store'
+import PromptDialog from '@src/components/PromptDialog'
 import { EditorState, hydrate } from '@src/layouts/editor/editorSlice'
-
-import PromptDialog from '../PromptDialog'
+import { RootState } from '@src/store'
 
 interface Props {
   isOpenExportDialog: boolean

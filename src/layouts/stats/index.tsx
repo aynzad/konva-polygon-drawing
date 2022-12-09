@@ -12,13 +12,12 @@ import {
   TableHead,
   TableRow
 } from '@mui/material'
-
 import {
   selectMaxPoints,
   selectMinPoints,
   selectTotalPoints,
   selectTotalPolygons
-} from '../editor/editorSlice'
+} from '@src/layouts/editor/editorSlice'
 
 export function Stats() {
   const totalPolygons = useSelector(selectTotalPolygons)
