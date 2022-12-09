@@ -113,11 +113,9 @@ export const editorSlice = createSlice({
     // In order to cancel the drawing that is currently underway
     cancelDrawing: state => {
       if (state.activePolygonId !== null) {
-        state.history[state.activeHistoryNodeIndex] = state.history[
-          state.activeHistoryNodeIndex
-        ].filter(polygon => polygon.id !== state.activePolygonId)
-
+        state.activeHistoryNodeIndex = state.activeHistoryNodeIndex - 1
         state.activePolygonId = null
+        state.history.pop()
       }
     }
   }
