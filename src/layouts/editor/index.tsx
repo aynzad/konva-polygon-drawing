@@ -2,6 +2,7 @@ import { useRef } from 'react'
 import type { Stage as StageType } from 'konva/lib/Stage'
 import { Layer, Stage } from 'react-konva'
 
+import { DrawingAlert } from '@src/components/DrawingAlert'
 import { Polygon } from '@src/components/Polygon'
 import { Toolbox } from '@src/components/Toolbox'
 import { useEditor } from '@src/hooks/use-editor'
@@ -56,6 +57,8 @@ export function Editor() {
           ))}
         </Layer>
       </Stage>
+
+      {isDrawing && <DrawingAlert />}
     </>
   )
 }

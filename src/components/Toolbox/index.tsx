@@ -22,7 +22,6 @@ interface Props {
 }
 
 export function Toolbox({ disabled, onRedo, onUndo, onResetZoom }: Props) {
-  const theme = useTheme()
   const hasUndo = useAppSelector(selectHasUndo)
   const hasRedo = useAppSelector(selectHasRedo)
   const [isOpenExportDialog, onOpenExportDialog, onCloseExportDialog] =
@@ -38,17 +37,17 @@ export function Toolbox({ disabled, onRedo, onUndo, onResetZoom }: Props) {
             opacity: disabled ? 0.3 : 1,
             transition: '0.4s opacity ease',
             position: 'absolute',
-            zIndex: theme.zIndex.fab,
-            top: theme.spacing(6),
+            zIndex: 'fab',
+            top: theme => theme.spacing(6),
             left: 0,
-            margin: theme.spacing(2)
+            margin: 2
           }}
         >
           <Paper>
             <nav aria-label="toolbox">
               <List
                 sx={{
-                  maxWidth: theme.spacing(7),
+                  maxWidth: theme => theme.spacing(7),
                   overflow: 'hidden',
                   pointerEvents: disabled ? 'none' : 'auto',
                   ':hover': {
