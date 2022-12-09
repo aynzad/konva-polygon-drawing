@@ -1,9 +1,11 @@
 import { useCallback } from 'react'
 import { KonvaEventObject } from 'konva/lib/Node'
+import { useKey } from 'react-use'
 
 import { useAppDispatch, useAppSelector } from '@src/store/hooks'
 import {
   addPointToActivePolygon,
+  cancelDrawing,
   createHistoryNode,
   initialNewPolygon,
   movePoint,
@@ -18,6 +20,12 @@ export function useEditor() {
   const polygons = useAppSelector(selectActiveHistoryNode)
   const isDrawing = useAppSelector(selectIsDrawing)
   const dispatch = useAppDispatch()
+
+  const handleCancelDrawing = () => {
+    dispatch(cancelDrawing())
+  }
+
+  useKey('Escape', handleCancelDrawing)
 
   const handleAddPoint = (event: KonvaEventObject<MouseEvent>) => {
     const stage = event.target.getStage()

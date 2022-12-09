@@ -29,7 +29,7 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 ## ☑️ TODO
 
 - [ ] Writing tests
-- [ ] Escape drawing
+- [x] Escape drawing
 
 ## 📝 License
 

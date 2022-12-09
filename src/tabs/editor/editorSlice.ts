@@ -109,6 +109,16 @@ export const editorSlice = createSlice({
         point.x = action.payload.position.x
         point.y = action.payload.position.y
       }
+    },
+    // In order to cancel the drawing that is currently underway
+    cancelDrawing: state => {
+      if (state.activePolygonId !== null) {
+        state.history[state.activeHistoryNodeIndex] = state.history[
+          state.activeHistoryNodeIndex
+        ].filter(polygon => polygon.id !== state.activePolygonId)
+
+        state.activePolygonId = null
+      }
     }
   }
 })
@@ -165,7 +175,8 @@ export const {
   createHistoryNode,
   initialNewPolygon,
   addPointToActivePolygon,
-  movePoint
+  movePoint,
+  cancelDrawing
 } = editorSlice.actions
 
 export default editorSlice.reducer
