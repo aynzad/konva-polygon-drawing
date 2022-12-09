@@ -5,15 +5,18 @@ import { Layer, Stage } from 'react-konva'
 import { Polygon } from '@src/components/Polygon'
 import { Toolbox } from '@src/components/Toolbox'
 import { useEditor } from '@src/hooks/use-editor'
+import { useResizeStage } from '@src/hooks/use-resize-stage'
 import { useZoomStage } from '@src/hooks/use-zoom-stage'
 
 export function Editor() {
   const stageRef = useRef<StageType | null>(null)
+
   const {
     scale,
     position,
     reset: onResetZoom
   } = useZoomStage({ stage: stageRef?.current })
+  const { width, height } = useResizeStage()
 
   const {
     polygons,
@@ -34,9 +37,9 @@ export function Editor() {
         onResetZoom={onResetZoom}
       />
       <Stage
+        width={width}
+        height={height}
         ref={stageRef}
-        width={window.innerWidth}
-        height={window.innerHeight}
         onClick={handleAddPoint}
         scale={scale}
         position={position}
