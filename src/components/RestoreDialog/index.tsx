@@ -10,7 +10,7 @@ import {
   DialogTitle
 } from '@mui/material'
 import { useDialogState } from '@src/hooks/use-dialog-state'
-import { isExist } from '@src/store/persist'
+import { hasPersistedData, removePersistedData } from '@src/store/persist'
 import { sagaActions } from '@src/store/saga'
 
 export default function RestoreDialog() {
@@ -18,7 +18,7 @@ export default function RestoreDialog() {
   const [open, handleOpen, handleClose] = useDialogState(false)
 
   useEffectOnce(() => {
-    const isPreviousSessionExist = isExist()
+    const isPreviousSessionExist = hasPersistedData()
     if (isPreviousSessionExist) {
       handleOpen()
     }
@@ -30,7 +30,7 @@ export default function RestoreDialog() {
   }
 
   const handleNewSession = () => {
-    dispatch({ type: sagaActions.REMOVE_PERSIST_STATE_SAGA })
+    removePersistedData()
     handleClose()
   }
 

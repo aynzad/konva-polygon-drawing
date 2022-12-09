@@ -2,43 +2,43 @@ import { PERSISTANCE_KEY } from '@src/constants'
 
 import { RootState } from './index'
 
-export function save(state: RootState): Promise<unknown> {
+export function persistData(state: RootState): boolean {
   try {
     window.localStorage.setItem(PERSISTANCE_KEY, JSON.stringify(state))
-    return Promise.resolve({})
+    return true
   } catch {
-    return Promise.reject({})
+    return false
   }
 }
 
-export function load(): Promise<RootState | null> {
+export function loadPersistedData(): RootState | null {
   const jsonState = window.localStorage.getItem(PERSISTANCE_KEY)
 
   try {
     const state = jsonState ? (JSON.parse(jsonState) as RootState) : null
-    return Promise.resolve(state)
+    return state
   } catch {
-    return Promise.resolve(null)
+    return null
   }
 }
 
-export function remove(): Promise<unknown> {
+export function removePersistedData(): boolean {
   try {
     window.localStorage.removeItem(PERSISTANCE_KEY)
-    return Promise.resolve({})
+    return true
   } catch {
-    return Promise.reject({})
+    return false
   }
 }
 
-export function isExist(): boolean {
+export function hasPersistedData(): boolean {
   const jsonState = window.localStorage.getItem(PERSISTANCE_KEY)
 
   try {
     const state = jsonState ? (JSON.parse(jsonState) as RootState) : null
     return !!state
   } catch {
-    window.localStorage.removeItem(PERSISTANCE_KEY)
+    removePersistedData()
     return false
   }
 }
