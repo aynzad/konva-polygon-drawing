@@ -1,9 +1,11 @@
 import React from 'react'
 
-import { Box, Tab, Tabs, Typography } from '@mui/material'
+import { Box, Tab, Tabs } from '@mui/material'
 import RestoreDialog from '@src/components/RestoreDialog'
 import { Editor } from '@src/tabs/editor'
 import { Stats } from '@src/tabs/stats'
+
+import { Logo } from './components/Logo'
 
 const tabs = {
   editor: 'Editor',
@@ -29,22 +31,7 @@ function App() {
           gap: 2
         }}
       >
-        <Typography
-          sx={{
-            px: 2,
-            fontWeight: 'bold',
-            fontSize: {
-              xs: '0.6rem',
-              sm: '1rem',
-              md: '1.25rem'
-            }
-          }}
-          color="primary"
-          variant="h6"
-          component="h1"
-        >
-          🔹 Konva Polygon Drawing
-        </Typography>
+        <Logo />
         <Tabs value={activeTab} onChange={handleTabChange} aria-label="Tabs">
           {Object.keys(tabs).map((key, index) => (
             <Tab
