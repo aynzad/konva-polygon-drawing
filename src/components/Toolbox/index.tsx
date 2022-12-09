@@ -5,7 +5,7 @@ import {
   SystemUpdateAlt,
   Undo
 } from '@mui/icons-material'
-import { Grid, List, Paper, ThemeProvider, useTheme } from '@mui/material'
+import { Grid, List, Paper, ThemeProvider } from '@mui/material'
 import { useDialogState } from '@src/hooks/use-dialog-state'
 import { selectHasRedo, selectHasUndo } from '@src/layouts/editor/editorSlice'
 import { useAppSelector } from '@src/store/hooks'
