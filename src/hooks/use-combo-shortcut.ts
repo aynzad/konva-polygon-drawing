@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import useKeyboardJs from 'react-use/lib/useKeyboardJs'
 
-export function useShortcut(
+export function useComboShortcut(
   combination: string | string[],
   callback: () => void,
   disabled?: boolean

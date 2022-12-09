@@ -6,7 +6,7 @@ import {
   ListItemIcon,
   ListItemText
 } from '@mui/material'
-import { useShortcut } from '@src/hooks/use-shortcut'
+import { useComboShortcut } from '@src/hooks/use-combo-shortcut'
 
 interface Props {
   text: string
@@ -22,7 +22,7 @@ export function ToolboxItem({
   Icon,
   text
 }: Props) {
-  useShortcut(shortcut, onClick, disabled)
+  useComboShortcut(shortcut, onClick, disabled)
 
   return (
     <ListItem disablePadding>
