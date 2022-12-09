@@ -8,7 +8,7 @@ import {
 import { Grid, List, Paper, ThemeProvider, useTheme } from '@mui/material'
 import { useDialogState } from '@src/hooks/use-dialog-state'
 import { useAppSelector } from '@src/store/hooks'
-import { selectHasRedo, selectHasUndo } from '@src/tabs/editor/editorSlice'
+import { selectHasRedo, selectHasUndo } from '@src/layouts/editor/editorSlice'
 import { darkTheme } from '@src/theme'
 
 import { ImportExport } from './ImportExport'

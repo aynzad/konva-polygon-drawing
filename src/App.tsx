@@ -2,8 +2,8 @@ import React from 'react'
 
 import { Box, Tab, Tabs } from '@mui/material'
 import RestoreDialog from '@src/components/RestoreDialog'
-import { Editor } from '@src/tabs/editor'
-import { Stats } from '@src/tabs/stats'
+import { Editor } from '@src/layouts/editor'
+import { Stats } from '@src/layouts/stats'
 
 import { Logo } from './components/Logo'
 

@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useCopyToClipboard } from 'react-use'
 
 import { RootState } from '@src/store'
-import { EditorState, hydrate } from '@src/tabs/editor/editorSlice'
+import { EditorState, hydrate } from '@src/layouts/editor/editorSlice'
 
 import PromptDialog from '../PromptDialog'
 

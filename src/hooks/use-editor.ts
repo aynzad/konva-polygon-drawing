@@ -13,7 +13,7 @@ import {
   selectActiveHistoryNode,
   selectIsDrawing,
   undo
-} from '@src/tabs/editor/editorSlice'
+} from '@src/layouts/editor/editorSlice'
 import { generateRandomColor } from '@src/utils/generate-random-color'
 
 export function useEditor() {
