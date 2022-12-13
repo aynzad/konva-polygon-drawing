@@ -66,7 +66,7 @@ export function Polygon({
             radius={4}
             stroke="#ff0000"
             strokeWidth={1}
-            onMouseEnter={e => changeStageCursor(e, isDrawing, 'resize')}
+            onMouseEnter={e => changeStageCursor(e, isDrawing, 'crosshair')}
             onMouseLeave={e => changeStageCursor(e, isDrawing)}
             onDragMove={e => onDragPointMove(e, id, point.id)}
             onDragStart={e => onDragPointStart(e, id, point.id)}

@@ -2,6 +2,7 @@ import { useRef } from 'react'
 import type { Stage as StageType } from 'konva/lib/Stage'
 import { Layer, Stage } from 'react-konva'
 
+import { Box } from '@mui/material'
 import { DrawingAlert } from '@src/components/DrawingAlert'
 import { Polygon } from '@src/components/Polygon'
 import { Toolbox } from '@src/components/Toolbox'
@@ -39,29 +40,30 @@ export function Editor() {
         onRedo={handleRedo}
         onResetZoom={onResetZoom}
       />
-      <Stage
-        width={width}
-        height={height}
-        ref={stageRef}
-        onClick={handleAddPoint}
-        scale={scale}
-        position={position}
-      >
-        <Layer>
-          {polygons.map(polygon => (
-            <Polygon
-              key={polygon.id}
-              onDragPointMove={handleDragPointMove}
-              onDragPointStart={handleDragPointStart}
-              onDragPolygonStart={handleDragPolygonStart}
-              onDragPolygonEnd={handleDragPolygonEnd}
-              isDrawing={isDrawing}
-              {...polygon}
-            />
-          ))}
-        </Layer>
-      </Stage>
-
+      <Box sx={{ cursor: 'pointer' }}>
+        <Stage
+          width={width}
+          height={height}
+          ref={stageRef}
+          onClick={handleAddPoint}
+          scale={scale}
+          position={position}
+        >
+          <Layer>
+            {polygons.map(polygon => (
+              <Polygon
+                key={polygon.id}
+                onDragPointMove={handleDragPointMove}
+                onDragPointStart={handleDragPointStart}
+                onDragPolygonStart={handleDragPolygonStart}
+                onDragPolygonEnd={handleDragPolygonEnd}
+                isDrawing={isDrawing}
+                {...polygon}
+              />
+            ))}
+          </Layer>
+        </Stage>
+      </Box>
       {isDrawing && <DrawingAlert />}
     </>
   )
