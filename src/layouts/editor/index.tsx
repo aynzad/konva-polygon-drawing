@@ -26,7 +26,9 @@ export function Editor() {
     handleRedo,
     handleAddPoint,
     handleDragPointMove,
-    handleDragPointStart
+    handleDragPointStart,
+    handleDragPolygonEnd,
+    handleDragPolygonStart
   } = useEditor()
 
   return (
@@ -51,6 +53,8 @@ export function Editor() {
               key={polygon.id}
               onDragPointMove={handleDragPointMove}
               onDragPointStart={handleDragPointStart}
+              onDragPolygonStart={handleDragPolygonStart}
+              onDragPolygonEnd={handleDragPolygonEnd}
               isDrawing={isDrawing}
               {...polygon}
             />

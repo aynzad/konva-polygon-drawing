@@ -117,6 +117,27 @@ export const editorSlice = createSlice({
         state.activePolygonId = null
         state.history.pop()
       }
+    },
+    // Move Polygon with all points
+    movePolygon: (
+      state,
+      action: PayloadAction<{
+        polygonId: number
+        movement: Vector2d
+      }>
+    ) => {
+      const activeHistoryNode = state.history[state.activeHistoryNodeIndex]
+
+      const polygon = activeHistoryNode.find(
+        ({ id }) => id === action.payload.polygonId
+      )
+
+      if (polygon) {
+        polygon.points.forEach(point => {
+          point.x += action.payload.movement.x
+          point.y += action.payload.movement.y
+        })
+      }
     }
   }
 })
@@ -174,7 +195,8 @@ export const {
   initialNewPolygon,
   addPointToActivePolygon,
   movePoint,
-  cancelDrawing
+  cancelDrawing,
+  movePolygon
 } = editorSlice.actions
 
 export default editorSlice.reducer

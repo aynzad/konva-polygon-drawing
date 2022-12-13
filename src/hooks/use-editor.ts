@@ -8,6 +8,7 @@ import {
   createHistoryNode,
   initialNewPolygon,
   movePoint,
+  movePolygon,
   redo,
   selectActiveHistoryNode,
   selectIsDrawing,
@@ -67,11 +68,54 @@ export function useEditor() {
     const stage = event.target.getStage()
     const position = stage?.getRelativePointerPosition()
 
-    if (!position) {
+    if (!stage || !position) {
       return
     }
+
+    stage.container().style.cursor = 'resize'
+
     dispatch(createHistoryNode())
     dispatch(movePoint({ polygonId, pointId, position }))
+  }
+
+  const handleDragPolygonStart = (
+    event: KonvaEventObject<DragEvent>,
+    polygonId: number
+  ) => {
+    const stage = event.target.getStage()
+
+    if (!stage) {
+      return
+    }
+
+    // TODO: create a util for change stage cursor
+    stage.container().style.cursor = 'move'
+  }
+
+  const handleDragPolygonEnd = (
+    event: KonvaEventObject<DragEvent>,
+    polygonId: number
+  ) => {
+    const stage = event.target.getStage()
+
+    // check for target name to deal with event bubbling
+    if (!stage || event.target.name() !== 'polygon') {
+      return
+    }
+
+    const movement = event.target._lastPos
+
+    dispatch(createHistoryNode())
+    dispatch(
+      movePolygon({
+        polygonId,
+        movement
+      })
+    )
+
+    // TODO: create a util for change stage cursor
+    stage.container().style.cursor = 'inherit'
+    event.target.position({ x: 0, y: 0 }) // to reset polygon group position
   }
 
   const handleRedo = useCallback(() => {
@@ -89,6 +133,8 @@ export function useEditor() {
     handleDragPointMove,
     handleDragPointStart,
     handleUndo,
-    handleRedo
+    handleRedo,
+    handleDragPolygonStart,
+    handleDragPolygonEnd
   }
 }

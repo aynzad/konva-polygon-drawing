@@ -1,5 +1,5 @@
 import { KonvaEventObject } from 'konva/lib/Node'
-import { Circle, Line } from 'react-konva'
+import { Circle, Group, Line } from 'react-konva'
 
 import { IPolygon } from '@src/types'
 
@@ -15,6 +15,14 @@ interface Props extends IPolygon {
     shapeId: number,
     pointId: number
   ) => void
+  onDragPolygonStart: (
+    event: KonvaEventObject<DragEvent>,
+    shapeId: number
+  ) => void
+  onDragPolygonEnd: (
+    event: KonvaEventObject<DragEvent>,
+    shapeId: number
+  ) => void
 }
 export function Polygon({
   id,
@@ -23,35 +31,44 @@ export function Polygon({
   fill,
   isDrawing,
   onDragPointStart,
-  onDragPointMove
+  onDragPointMove,
+  onDragPolygonStart,
+  onDragPolygonEnd
 }: Props) {
   return (
     <>
-      <Line
-        points={points
-          .map(point => [point.x, point.y])
-          .reduce((prev, current) => prev.concat(current))}
-        fill={fill}
-        stroke={'orange'}
-        strokeWidth={1}
-        draggable={false}
-        closed={closed}
-        dash={[]}
-      />
-
-      {points.map(point => (
-        <Circle
-          key={point.id}
-          x={point.x}
-          y={point.y}
-          radius={4}
-          stroke="#ff0000"
+      <Group
+        name="polygon"
+        draggable={!isDrawing && closed}
+        onDragEnd={e => onDragPolygonEnd(e, id)}
+        onDragStart={e => onDragPolygonStart(e, id)}
+      >
+        <Line
+          points={points
+            .map(point => [point.x, point.y])
+            .reduce((prev, current) => prev.concat(current))}
+          fill={fill}
+          stroke={'orange'}
           strokeWidth={1}
-          onDragMove={e => onDragPointMove(e, id, point.id)}
-          onDragStart={e => onDragPointStart(e, id, point.id)}
-          draggable={!isDrawing}
+          draggable={false}
+          closed={closed}
+          dash={[]}
         />
-      ))}
+
+        {points.map(point => (
+          <Circle
+            key={point.id}
+            x={point.x}
+            y={point.y}
+            radius={4}
+            stroke="#ff0000"
+            strokeWidth={1}
+            onDragMove={e => onDragPointMove(e, id, point.id)}
+            onDragStart={e => onDragPointStart(e, id, point.id)}
+            draggable={!isDrawing}
+          />
+        ))}
+      </Group>
     </>
   )
 }
