@@ -15,6 +15,7 @@ import {
   undo
 } from '@src/layouts/editor/editorSlice'
 import { useAppDispatch, useAppSelector } from '@src/store/hooks'
+import { changeStageCursor } from '@src/utils/change-stage-cursor'
 import { generateRandomColor } from '@src/utils/generate-random-color'
 
 export function useEditor() {
@@ -72,24 +73,18 @@ export function useEditor() {
       return
     }
 
-    stage.container().style.cursor = 'resize'
+    changeStageCursor(event, 'grabbing')
 
     dispatch(createHistoryNode())
     dispatch(movePoint({ polygonId, pointId, position }))
   }
 
-  const handleDragPolygonStart = (
-    event: KonvaEventObject<DragEvent>,
-    polygonId: number
-  ) => {
-    const stage = event.target.getStage()
-
-    if (!stage) {
+  const handleDragPolygonStart = (event: KonvaEventObject<DragEvent>) => {
+    if (event.target.name() !== 'polygon') {
       return
     }
 
-    // TODO: create a util for change stage cursor
-    stage.container().style.cursor = 'move'
+    changeStageCursor(event, 'grabbing')
   }
 
   const handleDragPolygonEnd = (
@@ -113,8 +108,8 @@ export function useEditor() {
       })
     )
 
-    // TODO: create a util for change stage cursor
-    stage.container().style.cursor = 'inherit'
+    changeStageCursor(event)
+
     event.target.position({ x: 0, y: 0 }) // to reset polygon group position
   }
 

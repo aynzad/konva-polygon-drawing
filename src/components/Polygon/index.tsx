@@ -2,6 +2,7 @@ import { KonvaEventObject } from 'konva/lib/Node'
 import { Circle, Group, Line } from 'react-konva'
 
 import { IPolygon } from '@src/types'
+import { changeStageCursor } from '@src/utils/change-stage-cursor'
 
 interface Props extends IPolygon {
   isDrawing: boolean
@@ -40,6 +41,8 @@ export function Polygon({
       <Group
         name="polygon"
         draggable={!isDrawing && closed}
+        onMouseEnter={e => changeStageCursor(e, 'move')}
+        onMouseLeave={e => changeStageCursor(e)}
         onDragEnd={e => onDragPolygonEnd(e, id)}
         onDragStart={e => onDragPolygonStart(e, id)}
       >
@@ -63,8 +66,11 @@ export function Polygon({
             radius={4}
             stroke="#ff0000"
             strokeWidth={1}
+            onMouseEnter={e => changeStageCursor(e, 'resize')}
+            onMouseLeave={e => changeStageCursor(e)}
             onDragMove={e => onDragPointMove(e, id, point.id)}
             onDragStart={e => onDragPointStart(e, id, point.id)}
+            onDragEnd={e => changeStageCursor(e)}
             draggable={!isDrawing}
           />
         ))}
