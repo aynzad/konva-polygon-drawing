@@ -41,8 +41,8 @@ export function Polygon({
       <Group
         name="polygon"
         draggable={!isDrawing && closed}
-        onMouseEnter={e => changeStageCursor(e, 'move')}
-        onMouseLeave={e => changeStageCursor(e)}
+        onMouseEnter={e => changeStageCursor(e, isDrawing, 'move')}
+        onMouseLeave={e => changeStageCursor(e, isDrawing)}
         onDragEnd={e => onDragPolygonEnd(e, id)}
         onDragStart={e => onDragPolygonStart(e, id)}
       >
@@ -66,11 +66,11 @@ export function Polygon({
             radius={4}
             stroke="#ff0000"
             strokeWidth={1}
-            onMouseEnter={e => changeStageCursor(e, 'resize')}
-            onMouseLeave={e => changeStageCursor(e)}
+            onMouseEnter={e => changeStageCursor(e, isDrawing, 'resize')}
+            onMouseLeave={e => changeStageCursor(e, isDrawing)}
             onDragMove={e => onDragPointMove(e, id, point.id)}
             onDragStart={e => onDragPointStart(e, id, point.id)}
-            onDragEnd={e => changeStageCursor(e)}
+            onDragEnd={e => changeStageCursor(e, isDrawing)}
             draggable={!isDrawing}
           />
         ))}

@@ -4,11 +4,12 @@ import { Cursor } from '@src/types'
 
 export function changeStageCursor(
   event: KonvaEventObject<DragEvent | MouseEvent>,
-  cursor: Cursor = 'default'
+  drawing: boolean,
+  cursor: Cursor = 'pointer'
 ) {
   const stage = event.target.getStage()
 
-  if (!stage) {
+  if (!stage || drawing) {
     return
   }
 

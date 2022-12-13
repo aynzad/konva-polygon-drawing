@@ -73,7 +73,7 @@ export function useEditor() {
       return
     }
 
-    changeStageCursor(event, 'grabbing')
+    changeStageCursor(event, isDrawing, 'grabbing')
 
     dispatch(createHistoryNode())
     dispatch(movePoint({ polygonId, pointId, position }))
@@ -84,7 +84,7 @@ export function useEditor() {
       return
     }
 
-    changeStageCursor(event, 'grabbing')
+    changeStageCursor(event, isDrawing, 'grabbing')
   }
 
   const handleDragPolygonEnd = (
@@ -108,7 +108,7 @@ export function useEditor() {
       })
     )
 
-    changeStageCursor(event)
+    changeStageCursor(event, isDrawing)
 
     event.target.position({ x: 0, y: 0 }) // to reset polygon group position
   }
