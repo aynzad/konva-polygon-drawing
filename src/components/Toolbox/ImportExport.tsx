@@ -1,9 +1,8 @@
-import { useDispatch, useSelector } from 'react-redux'
 import { useCopyToClipboard } from 'react-use'
 
 import PromptDialog from '@src/components/PromptDialog'
 import { EditorState, hydrate } from '@src/layouts/editor/editorSlice'
-import { RootState } from '@src/store'
+import { useAppDispatch, useAppSelector } from '@src/store/hooks'
 
 interface Props {
   isOpenExportDialog: boolean
@@ -17,10 +16,8 @@ export function ImportExport({
   isOpenImportDialog,
   onCloseImportDialog
 }: Props) {
-  const dispatch = useDispatch()
-  const exportJson = useSelector((state: RootState) =>
-    JSON.stringify(state.editor)
-  )
+  const dispatch = useAppDispatch()
+  const exportJson = useAppSelector(state => JSON.stringify(state.editor))
 
   const [, copyToClipboard] = useCopyToClipboard()
 

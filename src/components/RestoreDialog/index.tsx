@@ -1,4 +1,3 @@
-import { useDispatch } from 'react-redux'
 import { useEffectOnce } from 'react-use'
 
 import {
@@ -10,11 +9,12 @@ import {
   DialogTitle
 } from '@mui/material'
 import { useDialogState } from '@src/hooks/use-dialog-state'
+import { useAppDispatch } from '@src/store/hooks'
 import { hasPersistedData, removePersistedData } from '@src/store/persist'
 import { sagaActions } from '@src/store/saga'
 
 export default function RestoreDialog() {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const [open, handleOpen, handleClose] = useDialogState(false)
 
   useEffectOnce(() => {

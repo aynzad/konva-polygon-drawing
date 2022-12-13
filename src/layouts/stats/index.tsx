@@ -1,5 +1,4 @@
 import { useMemo } from 'react'
-import { useSelector } from 'react-redux'
 
 import {
   Container,
@@ -18,12 +17,13 @@ import {
   selectTotalPoints,
   selectTotalPolygons
 } from '@src/layouts/editor/editorSlice'
+import { useAppSelector } from '@src/store/hooks'
 
 export function Stats() {
-  const totalPolygons = useSelector(selectTotalPolygons)
-  const totalPoints = useSelector(selectTotalPoints)
-  const maxPoints = useSelector(selectMaxPoints)
-  const minPoints = useSelector(selectMinPoints)
+  const totalPolygons = useAppSelector(selectTotalPolygons)
+  const totalPoints = useAppSelector(selectTotalPoints)
+  const maxPoints = useAppSelector(selectMaxPoints)
+  const minPoints = useAppSelector(selectMinPoints)
 
   const rows = useMemo(() => {
     return [
